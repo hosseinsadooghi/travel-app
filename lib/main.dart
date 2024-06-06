@@ -2,7 +2,6 @@ import 'package:expandable_text/expandable_text.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:travel_app/model/TravelModel.dart';
 
 void main() {
@@ -63,8 +62,7 @@ class _MyHomePageState extends State<MainPage> {
                           image: DecorationImage(
                             image: AssetImage(travelList[_selectedIndex].image),
                             fit: BoxFit.cover,
-                          )
-                      ),
+                          )),
                     ),
                   ),
                   //head icons
@@ -77,19 +75,22 @@ class _MyHomePageState extends State<MainPage> {
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
+                          //like button
                           InkWell(
                             onTap: () {
                               setState(() {
-                                travelList[_selectedIndex].liked = !travelList[_selectedIndex].liked;
+                                travelList[_selectedIndex].liked =
+                                    !travelList[_selectedIndex].liked;
                               });
                             },
                             child: AnimatedContainer(
-                              duration: Duration(microseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               width: 50,
                               height: 50,
                               decoration: const BoxDecoration(
                                   shape: BoxShape.circle,
                                   color: Color.fromARGB(136, 158, 158, 158)),
+                                  
                               child: travelList[_selectedIndex].liked == false
                                   ? const Icon(CupertinoIcons.heart)
                                   : const Icon(
@@ -98,10 +99,11 @@ class _MyHomePageState extends State<MainPage> {
                                     ),
                             ),
                           ),
+                          //exti button
                           InkWell(
                             onTap: () => SystemNavigator.pop(),
                             child: AnimatedContainer(
-                              duration: Duration(microseconds: 500),
+                              duration: const Duration(milliseconds: 500),
                               width: 50,
                               height: 50,
                               decoration: const BoxDecoration(
@@ -138,6 +140,7 @@ class _MyHomePageState extends State<MainPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        //destination name
                         Text(
                           travelList[_selectedIndex].name,
                           style: const TextStyle(
@@ -145,9 +148,11 @@ class _MyHomePageState extends State<MainPage> {
                               fontWeight: FontWeight.bold,
                               fontSize: 30),
                         ),
+                        //space between destination name and location
                         const SizedBox(
                           height: 8,
                         ),
+                        //location
                         Row(
                           children: [
                             const Icon(
@@ -173,14 +178,14 @@ class _MyHomePageState extends State<MainPage> {
             //details part
             Expanded(
               child: Stack(
-                alignment: Alignment.topCenter, 
+                alignment: Alignment.topCenter,
                 children: [
                   Positioned(
                     bottom: 10,
                     child: Column(
                       children: [
                         //cards
-                        Container(
+                        SizedBox(
                           width: size.width / 10 * 8,
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -192,13 +197,13 @@ class _MyHomePageState extends State<MainPage> {
                                       borderRadius: BorderRadius.circular(20),
                                       side: const BorderSide(
                                           color: Color.fromARGB(40, 0, 0, 0),
-                                          width: 1)
-                                      ),
-                                  child: Container(
+                                          width: 1)),
+                                  child: SizedBox(
                                     height: 85,
                                     width: 85,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         const Text(
                                           "Distance",
@@ -209,8 +214,7 @@ class _MyHomePageState extends State<MainPage> {
                                             style: const TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 120, 202, 222),
-                                                fontSize: 20)
-                                            ),
+                                                fontSize: 20)),
                                         const SizedBox()
                                       ],
                                     ),
@@ -222,25 +226,24 @@ class _MyHomePageState extends State<MainPage> {
                                       borderRadius: BorderRadius.circular(20),
                                       side: const BorderSide(
                                           color: Color.fromARGB(40, 0, 0, 0),
-                                          width: 1)
-                                      ),
-                                  child: Container(
+                                          width: 1)),
+                                  child: SizedBox(
                                     height: 85,
                                     width: 85,
                                     child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                      mainAxisAlignment:
+                                          MainAxisAlignment.spaceEvenly,
                                       children: [
                                         const Text(
                                           "Temp",
                                           style: TextStyle(fontSize: 14),
                                         ),
                                         Text(
-                                            "${travelList[_selectedIndex].temp}\u00b0 C",
+                                            "${travelList[_selectedIndex].temp}\u00b0C",
                                             style: const TextStyle(
                                                 color: Color.fromARGB(
                                                     255, 120, 202, 222),
-                                                fontSize: 20)
-                                            ),
+                                                fontSize: 20)),
                                         const SizedBox()
                                       ],
                                     ),
@@ -253,7 +256,7 @@ class _MyHomePageState extends State<MainPage> {
                                       side: const BorderSide(
                                           color: Color.fromARGB(40, 0, 0, 0),
                                           width: 1)),
-                                  child: Container(
+                                  child: SizedBox(
                                     height: 85,
                                     width: 85,
                                     child: Column(
@@ -277,7 +280,7 @@ class _MyHomePageState extends State<MainPage> {
                           ),
                         ),
                         //description title
-                        Container(
+                        SizedBox(
                           width: size.width / 10 * 8,
                           child: const Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
@@ -296,7 +299,7 @@ class _MyHomePageState extends State<MainPage> {
                           ),
                         ),
                         //description
-                        Container(
+                        SizedBox(
                           height: size.height / 9,
                           width: size.width / 10 * 8,
                           child: SingleChildScrollView(
@@ -311,7 +314,7 @@ class _MyHomePageState extends State<MainPage> {
                           ),
                         ),
                         //price and sell botton
-                        Container(
+                        SizedBox(
                           width: size.width / 10 * 8,
                           height: size.height / 10,
                           child: Row(
@@ -341,7 +344,9 @@ class _MyHomePageState extends State<MainPage> {
                                 width: 100,
                                 height: 100,
                                 decoration: const BoxDecoration(
-                                    shape: BoxShape.circle, color: Colors.black),
+                                    shape: BoxShape.circle, 
+                                    color: Colors.black
+                                ),
                                 child: const Icon(
                                   CupertinoIcons.greaterthan,
                                   color: Colors.white,
@@ -353,7 +358,7 @@ class _MyHomePageState extends State<MainPage> {
                         ),
                       ],
                     ),
-                  ),              
+                  ),
                 ]
               ),
             ),
